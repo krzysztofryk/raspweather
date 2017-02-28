@@ -4,6 +4,8 @@ import time
 import smogpollution
 import weatherutils
 
+REFRESH_RATE = 50
+
 LOCATION_CITY = "Wroclaw"
 LOCATION_COUNTRY = "PL"
 
@@ -51,12 +53,16 @@ def weather_basic_info(weather_data):
         time.sleep(5)
 
 
-def main():
+def fetch_data():
     refresh_counter = 0
-    display.lcd_init()
-
     weather_data = yahooweather.forecast(LOCATION_CITY, LOCATION_COUNTRY)
     smog_data = smogpollution.get_smog_data()
+    return refresh_counter, smog_data, weather_data
+
+
+def main():
+    display.lcd_init()
+    refresh_counter, smog_data, weather_data = fetch_data()
 
     while True:
         basic_info()
@@ -64,11 +70,9 @@ def main():
         weather_basic_info(weather_data)
 
         refresh_counter += 1
-        if refresh_counter == 2:
+        if refresh_counter == REFRESH_RATE:
             refreshing_data_info()
-            weather_data = yahooweather.forecast(LOCATION_CITY, LOCATION_COUNTRY)
-            smog_data = smogpollution.get_smog_data()
-            refresh_counter = 0
+            refresh_counter, smog_data, weather_data = fetch_data()
 
 
 try:
