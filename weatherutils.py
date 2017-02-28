@@ -14,4 +14,4 @@ def location_string(city, country):
 
 
 def format_smog(string):
-    return '{0:.2f}'.format(float(string))
+    return int(float(string))
