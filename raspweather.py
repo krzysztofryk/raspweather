@@ -11,6 +11,7 @@ LOCATION_COUNTRY = "PL"
 def refreshing_data_info():
     display.lcd_string_scroll("Odswiezam dane", display.LCD_LINE_1)
     display.lcd_string_scroll("Prosze czekac...", display.LCD_LINE_2)
+    time.sleep(5)
 
 
 def basic_info():
@@ -65,7 +66,6 @@ def main():
     refresh_counter += 1
     if refresh_counter == 2:
         refreshing_data_info()
-        time.sleep(5)
         weather_data = yahooweather.forecast(LOCATION_CITY, LOCATION_COUNTRY)
         smog_data = smogpollution.get_smog_data()
         refresh_counter = 0
