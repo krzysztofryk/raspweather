@@ -19,8 +19,8 @@ def basic_info():
 
 
 def error_info():
-    display.lcd_string_scroll("Wystapil blad")
-    display.lcd_string_scroll("Dane zostana pobrane ponownie")
+    display.lcd_string_scroll("Wystapil blad", display.LCD_LINE_1)
+    display.lcd_string_scroll("Dane zostana pobrane ponownie", display.LCD_LINE_1)
 
 
 def smog_info(smog_data):
