@@ -63,12 +63,12 @@ def main():
         smog_info(smog_data)
         weather_basic_info(weather_data)
 
-    refresh_counter += 1
-    if refresh_counter == 2:
-        refreshing_data_info()
-        weather_data = yahooweather.forecast(LOCATION_CITY, LOCATION_COUNTRY)
-        smog_data = smogpollution.get_smog_data()
-        refresh_counter = 0
+        refresh_counter += 1
+        if refresh_counter == 2:
+            refreshing_data_info()
+            weather_data = yahooweather.forecast(LOCATION_CITY, LOCATION_COUNTRY)
+            smog_data = smogpollution.get_smog_data()
+            refresh_counter = 0
 
 
 try:
