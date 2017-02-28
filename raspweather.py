@@ -4,7 +4,7 @@ import time
 import smogpollution
 import weatherutils
 
-REFRESH_RATE = 50
+REFRESH_RATE = 2
 
 LOCATION_CITY = "Wroclaw"
 LOCATION_COUNTRY = "PL"
