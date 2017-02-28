@@ -16,6 +16,7 @@ def refreshing_data_info():
 def basic_info():
     display.lcd_string_scroll(weatherutils.date_time_string(), display.LCD_LINE_1)
     display.lcd_string_scroll(weatherutils.location_string(LOCATION_CITY, LOCATION_COUNTRY), display.LCD_LINE_2)
+    time.sleep(5)
 
 
 def error_info():
@@ -24,8 +25,12 @@ def error_info():
 
 
 def smog_info(smog_data):
-    display.lcd_string_scroll(smog_data["PM10"], display.LCD_LINE_1)
-    display.lcd_string_scroll(smog_data["PM25"], display.LCD_LINE_2)
+    if smog_data["error"] == 'true':
+        error_info()
+    else:
+        display.lcd_string_scroll(smog_data["PM10"], display.LCD_LINE_1)
+        display.lcd_string_scroll(smog_data["PM25"], display.LCD_LINE_2)
+    time.sleep(5)
 
 
 def forecast_info(weather_data):
@@ -34,8 +39,15 @@ def forecast_info(weather_data):
 
 
 def weather_basic_info(weather_data):
-    display.lcd_string_scroll(weather_data["temperature"], display.LCD_LINE_1)
-    display.lcd_string_scroll(weather_data["details"], display.LCD_LINE_2)
+    if weather_data["error"] == 'true':
+        error_info()
+        time.sleep(5)
+    else:
+        display.lcd_string_scroll(weather_data["temperature"], display.LCD_LINE_1)
+        display.lcd_string_scroll(weather_data["details"], display.LCD_LINE_2)
+        time.sleep(5)
+        forecast_info(weather_data)
+        time.sleep(5)
 
 
 def main():
@@ -47,31 +59,16 @@ def main():
 
     while True:
         basic_info()
+        smog_info(smog_data)
+        weather_basic_info(weather_data)
+
+    refresh_counter += 1
+    if refresh_counter == 2:
+        refreshing_data_info()
         time.sleep(5)
-
-        if smog_data["error"] == 'true':
-            error_info()
-            time.sleep(5)
-        else:
-            smog_info(smog_data)
-            time.sleep(5)
-
-        if weather_data["error"] == 'true':
-            error_info()
-            time.sleep(5)
-        else:
-            weather_basic_info(weather_data)
-            time.sleep(5)
-            forecast_info(weather_data)
-            time.sleep(5)
-
-        refresh_counter += 1
-        if refresh_counter == 100:
-            refreshing_data_info()
-            time.sleep(5)
-            weather_data = yahooweather.forecast(LOCATION_CITY, LOCATION_COUNTRY)
-            smog_data = smogpollution.get_smog_data()
-            refresh_counter = 0
+        weather_data = yahooweather.forecast(LOCATION_CITY, LOCATION_COUNTRY)
+        smog_data = smogpollution.get_smog_data()
+        refresh_counter = 0
 
 
 try:
