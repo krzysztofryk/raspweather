@@ -2,7 +2,6 @@ from urllib import quote
 import urllib2
 import json
 
-
 CONDITION_CODES = {
     "0": "tornado",
     "1": "burza tropikalna",
@@ -47,8 +46,7 @@ CONDITION_CODES = {
     "3200": "niedostepne"
 }
 
-
-ERROR_RESPONSE = json.loads("{'error':'true'}")
+ERROR_RESPONSE = "{'error':'true'}"
 
 
 def prepare_query(city, country):

@@ -8,8 +8,7 @@ HEADERS = {
     'Accept': 'application/json, text/javascript, */*; q=0.01'
 }
 
-
-ERROR_RESPONSE = json.loads("{'error':'true'}")
+ERROR_RESPONSE = "{'error':'true'}"
 
 
 def prepare_url():
