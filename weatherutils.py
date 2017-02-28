@@ -11,3 +11,7 @@ def today():
 
 def location_string(city, country):
     return "%s, %s" % (city, country)
+
+
+def format_smog(string):
+    return '{0:.2f}'.format(string)
