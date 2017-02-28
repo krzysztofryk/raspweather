@@ -81,7 +81,8 @@ def get_the_weather(json_response):
         "tomorrow_temperature": tomorrow_temperature,
         "tomorrow_details": tomorrow_details,
         "in2days_temperature": in2days_temperature,
-        "in2days_details": in2days_details
+        "in2days_details": in2days_details,
+        "error": "false"
     }
 
 

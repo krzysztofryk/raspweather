@@ -49,14 +49,14 @@ def main():
         basic_info()
         time.sleep(5)
 
-        if smog_data["error"]:
+        if smog_data["error"] == 'false':
             error_info()
             time.sleep(5)
         else:
             smog_info(smog_data)
             time.sleep(5)
 
-        if weather_data["error"]:
+        if weather_data["error"] == 'false':
             error_info()
             time.sleep(5)
         else:

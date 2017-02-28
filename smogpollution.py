@@ -25,7 +25,8 @@ def adapt_json_response(json_response):
     response = json.loads(json_response)
     return {
         "PM10": "PM10: %s ug/m3" % response["data"]["series"][0]["data"][-1][1],
-        "PM25": "PM2.5: %s ug/m3" % response["data"]["series"][1]["data"][-1][1]
+        "PM25": "PM2.5: %s ug/m3" % response["data"]["series"][1]["data"][-1][1],
+        "error": "false"
     }
 
 
